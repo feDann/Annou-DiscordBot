@@ -18,7 +18,7 @@ bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
   });
 
-bot.on('voiceStateUpdate',(oldMember , newMember ) =>{
+bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     
     let newUserChannel = newMember.channel
     let oldUserChannel = oldMember.channel
@@ -28,7 +28,15 @@ bot.on('voiceStateUpdate',(oldMember , newMember ) =>{
 
         const channelid = newMember.channelID;
         const userid = newMember.id;
-        const username = newMember.member.displayName;
+        
+        const song = await AudioOnJoin.findOne({
+            "channelid" : channelid,
+            "userid" : userid
+        })
+
+        if(song){
+            
+        }
 
         console.log(username + ' joined channel')
 
@@ -44,7 +52,7 @@ bot.on('voiceStateUpdate',(oldMember , newMember ) =>{
     
 })
 
-bot.on('message', message =>{
+bot.on('message', async  message =>{
     if(!message.guild) return;
 
     if(message.content.startsWith('!setjoinsong')){
@@ -53,13 +61,49 @@ bot.on('message', message =>{
         const splittedString = message.content.split(" ");
         
         if(youtubeValidation(splittedString[1])){
-            console.log(splittedString[1])
+            // the url is valid so i can add this in the database
+            // now i have to check if is in a voice channel, otherwise i'll tell him to join a voice channel and use the comand again
+            const channelid = message.member.voice.channelID;
+            
+            if(!channelid){
+                message.reply('You have to join a voice channel in order to use this command!🤦‍♂️🤦‍♂️')
+                return;
+            }
+
+            const userid = message.author.id;
+            
+            //find if there is already a song for this channel in the database
+            const isthereone = await AudioOnJoin.findOne(
+                {"channelid" : channelid,
+                "userid" : userid});
+            
+            //json for mongoose document    
+            const newAudio = {
+                userid : userid,
+                channelid : channelid,
+                url : splittedString[1], 
+            };
+                
+            if(!isthereone){
+                // no audio setted yet for this channel, i will add the url
+                const audioOnJoin = new AudioOnJoin(newAudio);
+
+                audioOnJoin.save()
+                message.reply('Your song was added correctly!')
+            }
+            else{
+                // there is already an audio for this channel , i'll have to update the song
+                await isthereone.updateOne(newAudio);
+                message.reply("Your song was updated!")
+            }            
+            
+
         }else{
             message.reply('The URL is wrong or missing!')
         }
 
         }catch(err){
-            message.reply('problem')
+            message.reply('A problem occurred during the execution of your command')
         }
 
         
