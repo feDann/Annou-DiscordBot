@@ -7,6 +7,7 @@ const bot = new Discord.Client();
 const mongoose = require('mongoose');
 const AudioOnJoin = require('./models/audioonjoin');
 const {youtubeValidation} = require('./utils/urlvalidator')
+const ytdl = require('ytdl-core');
 
 const TOKEN = process.env.TOKEN;
 const DBURL = process.env.DB_URL;
@@ -28,13 +29,17 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
 
         const channelid = newMember.channelID;
         const userid = newMember.id;
-        
+        const username = newMember.member.displayName;
+
         const song = await AudioOnJoin.findOne({
             "channelid" : channelid,
             "userid" : userid
         })
 
-        if(song){
+        if(song){       
+            const connection = await newMember.channel.join();
+            const dispatcher = connection.play(ytdl(song.url, { filter: 'audioonly' }));
+      
             
         }
 
@@ -109,5 +114,16 @@ bot.on('message', async  message =>{
         
 
     }
+    else if(message.content.startsWith('!stop')){
+        if(message.member.voice.channel){
+            const connection = await message.member.voice.channel.join();
+            const dispatcher = connection.dispatcher;
+            dispatcher.destroy();
+            connection.disconnect();
+        }
+    }
+
+
 })
+
 
