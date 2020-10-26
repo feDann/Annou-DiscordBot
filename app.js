@@ -40,8 +40,10 @@ for(const audiofile of playcommandFiles){
 mongoose.connect(DBURL);
 bot.login(TOKEN);
 
+
 bot.on('ready', () => {
     console.info(`Logged in as ${bot.user.tag}!`);
+    bot.user.setActivity(`!help` , {type : "LISTENING"});
   });
 
 bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
