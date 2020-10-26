@@ -2,13 +2,14 @@
   "name": "discordbot",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js"
   },
-  "author": "",
+  "author": "fedann",
   "license": "ISC",
   "dependencies": {
+    "discord-tts": "git+https://github.com/mundoex/discord-tts.git",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",

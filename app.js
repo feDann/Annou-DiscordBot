@@ -6,9 +6,9 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const mongoose = require('mongoose');
 const AudioOnJoin = require('./models/audioonjoin');
+const discordTTS = require('discord-tts');
 
 
-const ytdl = require('ytdl-core');
 const fs = require('fs');
 
 const TOKEN = process.env.TOKEN;
@@ -18,13 +18,22 @@ const prefix = "!";
 
 
 bot.commands = new Discord.Collection();
+bot.audiocommands = new Discord.Collection();
 
 const commandFiles  = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+const playcommandFiles = fs.readdirSync('./audiocommands/').filter(file => file.endsWith('.js'));
 
 for(const file of commandFiles){
     const command = require(`./commands/${file}`);
 
     bot.commands.set(command.name , command);
+
+}
+
+for(const audiofile of playcommandFiles){
+    const audiocommand = require(`./audiocommands/${audiofile}`);
+
+    bot.audiocommands.set(audiocommand.name , audiocommand);
 
 }
 
@@ -43,23 +52,7 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
 
     if(newUserChannel !== null && oldUserChannel !== newUserChannel ) {
 
-        const channelid = newMember.channelID;
-        const userid = newMember.id;
-        const username = newMember.member.displayName;
-
-        const song = await AudioOnJoin.findOne({
-            "channelid" : channelid,
-            "userid" : userid
-        })
-
-        if(song){       
-            const connection = await newMember.channel.join();
-            const dispatcher = connection.play(ytdl(song.url, { filter: 'audioonly' }));
-      
-            
-        }
-
-        console.log(username + ' joined channel')
+        bot.audiocommands.get('playsongonjoin').execute(oldMember, newMember)
 
     } else if(newUserChannel === null){
 
@@ -69,6 +62,9 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     }
     else{
         console.log('other stuff')
+        const connection = await newMember.channel.join();
+        const stream = discordTTS.getVoiceStream("fedann muted himself");
+        const dispatcher = connection.play(stream);
     }
     
 })
