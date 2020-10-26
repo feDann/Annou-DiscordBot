@@ -9,7 +9,6 @@ module.exports = {
         
         const channelid = newMember.channelID;
         const userid = newMember.id;
-        const username = newMember.member.displayName;
 
         const song = await AudioOnJoin.findOne({
             "channelid" : channelid,
@@ -29,8 +28,6 @@ module.exports = {
             })
             
         }
-
-        console.log(username + ' joined channel')
 
     }
 }

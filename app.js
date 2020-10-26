@@ -48,15 +48,16 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     
     let newUserChannel = newMember.channel
     let oldUserChannel = oldMember.channel
-
+    
+    const username = newMember.member.displayName;
 
     if(newUserChannel !== null && oldUserChannel !== newUserChannel ) {
-
+        console.log(username + ' joined channel')
         bot.audiocommands.get('playsongonjoin').execute(oldMember, newMember)
 
     } else if(newUserChannel === null){
 
-        const username = newMember.member.displayName;
+        
 
         console.log(username + ' leaves channel')
     }
@@ -68,22 +69,22 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
             // deaf
             if(oldMember.deaf === false  && newMember.deaf === true){
                 bot.audiocommands.get('deafalert').execute(oldMember,newMember);
-                console.log('Deaf action')
+                console.log(`${username} deaf action`)
             }
             // nodeaf
             else if(oldMember.deaf === true  && newMember.deaf === false){
                 bot.audiocommands.get('undeafalert').execute(oldMember,newMember);
-                console.log('Undeaf action')
+                console.log(`${username} undeaf action`)
             }
             // muted action
             else if(oldMember.mute === false  && newMember.mute === true){
                 bot.audiocommands.get('mutedalert').execute(oldMember,newMember);
-                console.log('Mute action')
+                console.log(`${username} mute action`)
             }
             // unmuted action
             else if(oldMember.mute === true  && newMember.mute === false){
                 bot.audiocommands.get('unmutedalert').execute(oldMember,newMember);
-                console.log('Unmute action')
+                console.log(`${username} unmute action`)
             }
             
         }
