@@ -6,11 +6,27 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const mongoose = require('mongoose');
 const AudioOnJoin = require('./models/audioonjoin');
-const {youtubeValidation} = require('./utils/urlvalidator')
+
+
 const ytdl = require('ytdl-core');
+const fs = require('fs');
 
 const TOKEN = process.env.TOKEN;
 const DBURL = process.env.DB_URL;
+
+const prefix = "!";
+
+
+bot.commands = new Discord.Collection();
+
+const commandFiles  = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
+
+for(const file of commandFiles){
+    const command = require(`./commands/${file}`);
+
+    bot.commands.set(command.name , command);
+
+}
 
 mongoose.connect(DBURL);
 bot.login(TOKEN);
@@ -57,71 +73,17 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     
 })
 
-bot.on('message', async  message =>{
-    if(!message.guild) return;
+bot.on('message', message =>{
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
 
-    if(message.content.startsWith('!setjoinsong')){
-        
-        try{
-        const splittedString = message.content.split(" ");
-        
-        if(youtubeValidation(splittedString[1])){
-            // the url is valid so i can add this in the database
-            // now i have to check if is in a voice channel, otherwise i'll tell him to join a voice channel and use the comand again
-            const channelid = message.member.voice.channelID;
-            
-            if(!channelid){
-                message.reply('You have to join a voice channel in order to use this command!🤦‍♂️🤦‍♂️')
-                return;
-            }
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
 
-            const userid = message.author.id;
-            
-            //find if there is already a song for this channel in the database
-            const isthereone = await AudioOnJoin.findOne(
-                {"channelid" : channelid,
-                "userid" : userid});
-            
-            //json for mongoose document    
-            const newAudio = {
-                userid : userid,
-                channelid : channelid,
-                url : splittedString[1], 
-            };
-                
-            if(!isthereone){
-                // no audio setted yet for this channel, i will add the url
-                const audioOnJoin = new AudioOnJoin(newAudio);
-
-                audioOnJoin.save()
-                message.reply('Your song was added correctly!')
-            }
-            else{
-                // there is already an audio for this channel , i'll have to update the song
-                await isthereone.updateOne(newAudio);
-                message.reply("Your song was updated!")
-            }            
-            
-
-        }else{
-            message.reply('The URL is wrong or missing!')
-        }
-
-        }catch(err){
-            message.reply('A problem occurred during the execution of your command')
-        }
-
-        
-
-    }
-    else if(message.content.startsWith('!stop')){
-        if(message.member.voice.channel){
-            const connection = await message.member.voice.channel.join();
-            const dispatcher = connection.dispatcher;
-            dispatcher.destroy();
-            connection.disconnect();
-        }
-    }
+    try{
+    bot.commands.get(command).execute(message, args);
+    }catch(err){
+        console.log('missing command');
+    }   
 
 
 })
