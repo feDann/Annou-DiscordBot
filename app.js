@@ -5,7 +5,7 @@ dotenv.config();
 const Discord = require('discord.js');
 const bot = new Discord.Client();
 const mongoose = require('mongoose');
-const AudioOnJoin = require('./models/audioonjoin');
+const AlertSchema = require('./models/alertschema');
 const discordTTS = require('discord-tts');
 
 
@@ -61,10 +61,33 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
         console.log(username + ' leaves channel')
     }
     else{
-        console.log('other stuff')
-        const connection = await newMember.channel.join();
-        const stream = discordTTS.getVoiceStream("fedann muted himself");
-        const dispatcher = connection.play(stream);
+        
+        const channelid = newMember.channelID;
+        const result = await AlertSchema.findOne({channelid:channelid});
+        if(result && result.alert){
+            // deaf
+            if(oldMember.deaf === false  && newMember.deaf === true){
+                bot.audiocommands.get('deafalert').execute(oldMember,newMember);
+                console.log('Deaf action')
+            }
+            // nodeaf
+            else if(oldMember.deaf === true  && newMember.deaf === false){
+                bot.audiocommands.get('undeafalert').execute(oldMember,newMember);
+                console.log('Undeaf action')
+            }
+            // muted action
+            else if(oldMember.mute === false  && newMember.mute === true){
+                bot.audiocommands.get('mutedalert').execute(oldMember,newMember);
+                console.log('Mute action')
+            }
+            // unmuted action
+            else if(oldMember.mute === true  && newMember.mute === false){
+                bot.audiocommands.get('unmutedalert').execute(oldMember,newMember);
+                console.log('Unmute action')
+            }
+            
+        }
+        
     }
     
 })
