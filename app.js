@@ -58,8 +58,6 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
 
     } else if(newUserChannel === null){
 
-        
-
         console.log(username + ' leaves channel')
     }
     else{
