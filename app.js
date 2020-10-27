@@ -6,7 +6,6 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const mongoose = require('mongoose');
 const AlertSchema = require('./models/alertschema');
-const discordTTS = require('discord-tts');
 
 
 const fs = require('fs');

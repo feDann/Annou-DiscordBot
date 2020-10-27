@@ -1,7 +1,8 @@
 {
-  "name": "discordbot",
+  "name": "annou",
   "version": "1.0.0",
-  "description": "",
+  "description": "Annou discord bot",
+  "repository": "https://github.com/feDann/Annou-DiscordBot",
   "main": "app.js",
   "scripts": {
     "start": "node app.js"
@@ -9,11 +10,11 @@
   "author": "fedann",
   "license": "ISC",
   "dependencies": {
-    "discord-tts": "git+https://github.com/mundoex/discord-tts.git",
     "discord.js": "^12.4.1",
     "dotenv": "^8.2.0",
     "ffmpeg-static": "^4.2.7",
-    "mongoose": "^5.10.10",
+    "google-tts-api": "0.0.4",
+    "mongoose": "^5.10.11",
     "opusscript": "0.0.7",
     "ytdl-core": "^4.0.0"
   }

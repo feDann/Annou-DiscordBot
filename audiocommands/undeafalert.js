@@ -1,5 +1,4 @@
-const discordTTS = require('discord-tts');
-
+const googleTTS = require('google-tts-api');
 
 module.exports = {
     name : 'undeafalert',
@@ -8,8 +7,8 @@ module.exports = {
         try{
             const username = newMember.member.displayName;
             const connection = await newMember.channel.join();
-            const stream = discordTTS.getVoiceStream(`${username} now can ear`);
-            const dispatcher = connection.play(stream);       
+            const url = await googleTTS(`${username} now can ear`, 'en', 1);  
+            const dispatcher = connection.play(url);
         }catch(err){
             console.log('Error occured')
         }  
