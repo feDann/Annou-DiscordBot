@@ -2,7 +2,7 @@ const {youtubeValidation} = require('../utils/urlvalidator');
 const AudioOnJoin = require('../models/audioonjoin');
 
 module.exports = {
-    name : 'setjoinsong',
+    name : 'setsong',
     description : 'add your song related to your current voice channel to the db',
     async execute(message, args){
 
