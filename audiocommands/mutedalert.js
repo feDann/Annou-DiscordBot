@@ -11,7 +11,6 @@ module.exports = {
             const dispatcher = connection.play(url);
         }catch(err){
             console.log('Error occured')
-            console.log(err)
         }     
          
         
