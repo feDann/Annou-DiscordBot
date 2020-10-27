@@ -36,7 +36,7 @@ for(const audiofile of playcommandFiles){
 
 }
 
-mongoose.connect(DBURL);
+mongoose.connect(DBURL, { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true });
 bot.login(TOKEN);
 
 
