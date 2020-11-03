@@ -9,8 +9,7 @@ module.exports = {
         const embed = new MessageEmbed()
         .setTitle('!help')
         .setAuthor('Annou')
-        .setDescription(helpmessage)
-        .setColor('0xff0000');
+        .setDescription(helpmessage);
         message.reply(embed);
     }
 }

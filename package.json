@@ -5,7 +5,7 @@
   "repository": "https://github.com/feDann/Annou-DiscordBot",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "fedann",
   "license": "ISC",
@@ -16,6 +16,7 @@
     "google-tts-api": "0.0.4",
     "mongoose": "^5.10.11",
     "node-opus": "^0.3.3",
+    "nodemon": "^2.0.6",
     "ytdl-core": "^4.0.0"
   }
 }

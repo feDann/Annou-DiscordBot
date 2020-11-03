@@ -1,4 +1,5 @@
 const AudioOnJoin = require('../models/audioonjoin');
+const {MessageEmbed} = require('discord.js'); 
 
 module.exports = {
     name : 'deletesong',
@@ -8,7 +9,9 @@ module.exports = {
             const channelid = message.member.voice.channelID;
             
             if(!channelid){
-                message.reply('You have to join a voice channel in order to use this command!🤦‍♂️🤦‍♂️')
+                const embed = new MessageEmbed()
+                    .setDescription('Can\'t do to much for you if you don\'t join a voice channel🤷‍♂️');
+                message.reply(embed);
                 return;
             }
 
@@ -19,7 +22,10 @@ module.exports = {
                 {"channelid" : channelid,
                 "userid" : userid});
             
-            message.reply('Your song was deleted!🎶😎')           
+            
+            const embed = new MessageEmbed()
+                .setDescription('Your song was deleted!📴☹');
+            message.reply(embed); 
             
 
            

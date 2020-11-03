@@ -1,4 +1,5 @@
 const AlertSchema = require('../models/alertschema');
+const {MessageEmbed} = require('discord.js'); 
 
 module.exports = {
     name : 'alerton',
@@ -17,9 +18,13 @@ module.exports = {
             }else{
                 await isthereone.updateOne(newalert);
             }
-            message.reply('Alert activated for this voice channel')
+            const embed = new MessageEmbed()
+                            .setDescription('Alert activated for this voice channel🎙');
+            message.reply(embed)
         }else{
-            message.reply('Can\'t do to much for you if you don\'t join a voice channel🤷‍♂️');
+            const embed = new MessageEmbed()
+                            .setDescription('Can\'t do to much for you if you don\'t join a voice channel🤷‍♂️');
+            message.reply(embed);
         }
     }
 }

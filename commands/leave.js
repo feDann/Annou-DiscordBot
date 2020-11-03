@@ -1,3 +1,5 @@
+const {MessageEmbed} = require('discord.js'); 
+
 module.exports = {
     name : 'leave',
     description : 'this command make the bot leave the voice channel',
@@ -5,11 +7,12 @@ module.exports = {
         
         if(message.member.voice.channel){
             await message.member.voice.channel.leave();
-            message.react('👋');
-            
+            message.react('👋');            
+        }else{
+            const embed = new MessageEmbed()
+                .setDescription("You have to join a voice channel in order to use this command!🤦‍♂️🤦‍♂️");
+            message.reply(embed);
         }
-        else{
-            message.reply('Can\'t do to much for you🤷‍♂️');
-        }
+
     }
 }

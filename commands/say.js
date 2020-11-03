@@ -1,4 +1,5 @@
 const googleTTS = require('google-tts-api');
+const {MessageEmbed} = require('discord.js'); 
 
 module.exports = {
     name : 'say',
@@ -17,20 +18,30 @@ module.exports = {
                         message.react('▶')
                     }
                     else{
-                        message.reply('Please remember to use a correct language format and a text less than 200 characters😡');
+                        const embed = new MessageEmbed()
+                            .setDescription('Please remember to use a correct language format and a text less than 200 characters😡');
+                        message.reply(embed);  
+
                     }
                 }
                 else{
-                    message.reply('Please remember to use a correct language format and a text less than 200 characters😡');
+                    const embed = new MessageEmbed()
+                        .setDescription('There are some missing arguments in order to use this command!🤦‍♂️');
+                    message.reply(embed);
                 }
                 
             }catch(err){
                 await message.member.voice.channel.leave();
-                message.reply('A problem occurred😢😢. Please check if your language code was correct! (two letter code)')
+                const embed = new MessageEmbed()
+                    .setDescription('A problem occurred😢😢. Please check if your language code was correct! (two letter code)');
+                message.reply(embed);
+            
             }
         }
         else{
-            message.reply('You have to join a voice channel in order to use this command!🤦‍♂️🤦‍♂️')
+            const embed = new MessageEmbed()
+                .setDescription('Can\'t do to much for you if you don\'t join a voice channel🤷‍♂️');
+            message.reply(embed);
         }          
 
     }

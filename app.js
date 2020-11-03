@@ -41,9 +41,30 @@ bot.login(TOKEN);
 
 
 bot.on('ready', () => {
-    console.info(`Logged in as ${bot.user.tag}!`);
+    const numberOfGuilds = bot.guilds.cache.size
+    console.info(`Logged in as ${bot.user.tag}!\nCurrently in ${numberOfGuilds} guilds!`);
     bot.user.setActivity(`!help` , {type : "LISTENING"});
   });
+
+bot.on('guildDelete' || 'guildUnavailable', guild =>{
+    console.log(`Removed from guild: ${guild.name}`)
+});
+
+
+bot.on('message', message =>{
+    if(!message.content.startsWith(prefix) || message.author.bot) return;
+
+    const args = message.content.slice(prefix.length).split(/ +/);
+    const command = args.shift().toLowerCase();
+
+    try{
+    bot.commands.get(command).execute(message, args);
+    }catch(err){
+        console.log('missing command');
+    }   
+    
+})
+
 
 bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     
@@ -70,7 +91,7 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
                 bot.audiocommands.get('deafalert').execute(oldMember,newMember);
                 console.log(`${username} deaf action`)
             }
-            // nodeaf
+            // no-deaf
             else if(oldMember.deaf === true  && newMember.deaf === false){
                 bot.audiocommands.get('undeafalert').execute(oldMember,newMember);
                 console.log(`${username} undeaf action`)
@@ -92,19 +113,5 @@ bot.on('voiceStateUpdate',async (oldMember , newMember ) =>{
     
 })
 
-bot.on('message', message =>{
-    if(!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-    try{
-    bot.commands.get(command).execute(message, args);
-    }catch(err){
-        console.log('missing command');
-    }   
-
-
-})
 
 
