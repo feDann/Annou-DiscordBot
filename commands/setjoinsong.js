@@ -35,8 +35,7 @@ module.exports = {
                     const isthereone = await AudioOnJoin.findOne(
                         {
                             "channelid": channelid,
-                            "userid": userid,
-                            guildid: guildid
+                            "userid": userid
                         });
 
 

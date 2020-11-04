@@ -10,7 +10,7 @@ module.exports = {
             const guildid = message.guild.id;
             const newalert = {
                 channelid : channelid,
-                guildid:guildid,
+                guildid: guildid,
                 alert : "false"
             }
             const isthereone = await AlertSchema.findOne({channelid:channelid});
