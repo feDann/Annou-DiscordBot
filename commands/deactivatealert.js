@@ -7,8 +7,10 @@ module.exports = {
     async execute(message, args){
         if(message.member.voice.channel){
             const channelid = message.member.voice.channel.id;
+            const guildid = message.guild.id;
             const newalert = {
                 channelid : channelid,
+                guildid:guildid,
                 alert : "false"
             }
             const isthereone = await AlertSchema.findOne({channelid:channelid});

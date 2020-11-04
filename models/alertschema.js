@@ -6,6 +6,7 @@ const alertSchema = mongoose.Schema({
         auto: true,
       },
     channelid : String,
+    guildid: String,
     alert : Boolean, 
 
 });

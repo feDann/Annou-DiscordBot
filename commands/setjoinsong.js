@@ -11,7 +11,7 @@ module.exports = {
         const channelid = message.member.voice.channelID;
 
         if (channelid) {
-
+            const guildid = message.guild.id;
             if (args.length > 0) {
                 var startTime = '0';
                 if (youtubeValidation(args[0])) {
@@ -35,13 +35,15 @@ module.exports = {
                     const isthereone = await AudioOnJoin.findOne(
                         {
                             "channelid": channelid,
-                            "userid": userid
+                            "userid": userid,
+                            guildid: guildid
                         });
 
 
                     const newAudio = {
                         userid: userid,
                         channelid: channelid,
+                        guildid: guildid,
                         url: args[0],
                         startTime: startTime
                     };

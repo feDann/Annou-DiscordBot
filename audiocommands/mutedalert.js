@@ -10,7 +10,7 @@ module.exports = {
             const url = await googleTTS(`${username} muted`, 'en', 1);  
             const dispatcher = connection.play(url);
         }catch(err){
-            console.log('Error occured')
+            console.log(`ERROR: ${err.message}`)
         }     
          
         
