@@ -1,5 +1,6 @@
-const googleTTS = require('google-tts-api');
-const {MessageEmbed} = require('discord.js'); 
+const tts = require('../utils/tts');
+const {MessageEmbed} = require('discord.js');
+const ISO6391 = require('iso-639-1'); 
 
 module.exports = {
     name : 'say',
@@ -12,8 +13,9 @@ module.exports = {
                     const text = args.join(" ");
                     if(!(lang.length!== 2 || text.length>200)){
                         
+                        
                         const connection = await message.member.voice.channel.join();
-                        const url = await googleTTS(text, lang, 1);  
+                        const url = await tts(text, lang, 1);  
                         const dispatcher = connection.play(url);
                         message.react('▶')
                     }

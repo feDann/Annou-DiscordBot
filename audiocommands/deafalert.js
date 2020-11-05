@@ -1,4 +1,4 @@
-const googleTTS = require('google-tts-api');
+const tts = require('../utils/tts');
 
 module.exports = {
     name : 'deafalert',
@@ -7,7 +7,7 @@ module.exports = {
         try{
             const username = newMember.member.displayName;
             const connection = await newMember.channel.join();
-            const url = await googleTTS(`${username} now is deaf`, 'en', 1);  
+            const url =await  tts(`${username} now is deaf`, 'en', 1);  
             const dispatcher = connection.play(url);
         }catch(err){
             console.log(`ERROR: ${err.message}`)
