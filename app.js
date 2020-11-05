@@ -6,9 +6,7 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const mongoose = require('mongoose');
 const AlertSchema = require('./models/alertschema');
-
 const AudioOn = require('./models/audioonjoin');
-const Alert = require('./models/alertschema');
 
 const fs = require('fs');
 
@@ -50,7 +48,7 @@ bot.on('ready', () => {
 
 bot.on('guildDelete' || 'guildUnavailable', async guild => {
     const guildid = guild.id;
-    await Alert.deleteMany({ guildid: guildid });
+    await AlertSchema.deleteMany({ guildid: guildid });
 
     await AudioOn.deleteMany({ guildid: guildid });
     console.log('All guild reference deleted from DB');
