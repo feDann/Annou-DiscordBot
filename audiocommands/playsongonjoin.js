@@ -21,7 +21,7 @@ module.exports = {
 			);
 			// ! Works but still in testing!
 			setTimeout(() => {
-				dispatcher.destroy();
+				dispatcher.end();
 			}, 10 * 1000);
 		}
 	},
