@@ -19,11 +19,10 @@ module.exports = {
 				ytdl(song.url, { filter: 'audioonly' }),
 				{ seek: song.startTime ? song.startTime : '0' }
 			);
-			// ! Works but still in tersting!
+			// ! Works but still in testing!
 			setTimeout(() => {
-                dispatcher.destroy();
+				dispatcher.destroy();
 			}, 10 * 1000);
-
 		}
 	},
 };
