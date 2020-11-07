@@ -63,8 +63,9 @@ bot.on('message', message => {
 
     try {
         bot.commands.get(command).execute(message, args);
+        console.log(`${message.member.displayName} used command ${command}`);
     } catch (err) {
-        console.log('missing command');
+        // console.log('missing command');
     }
 
 })
