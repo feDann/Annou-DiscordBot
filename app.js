@@ -83,8 +83,9 @@ bot.on('voiceStateUpdate', async (oldMember, newMember) => {
         bot.audiocommands.get('playsongonjoin').execute(oldMember, newMember)
 
     } else if (newUserChannel === null) {
-
         console.log(username + ' leaves channel')
+        // Check if the channel is empty and if it so make the bot leave
+        bot.audiocommands.get('inactivity').execute(bot,oldMember,newMember);
     }
     else {
 
