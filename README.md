@@ -41,4 +41,4 @@ Now type ```npm start``` and your bot should be up and running!
 - **!stop** - stop the playing song
 - **!leave** - Annou leaves your voice channel
 #### alternative commands:
--  **!setcsong [VOICE_CHANNEL_NAME] [YOUTUBE_URL] [START_TIME]** - same as **!setsong**, you can use this command even if you are not in a voice channel.Please while using this command replace all the spaces in the channel name with '_'
+-  **!setcsong [VOICE_CHANNEL_NAME] [YOUTUBE_URL] [START_TIME]** - same as **!setsong**, you can use this command even if you are not in a voice channel.Please while using this command replace all the spaces of the channel name with '_'
