@@ -8,7 +8,7 @@ const audioOnJoinSchema = mongoose.Schema({
     userid : String,
     channelid : String,
     guildid : String,
-    startTime:String,
+    startTime : String,
     url : String, 
 
 });
