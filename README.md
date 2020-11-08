@@ -1,8 +1,10 @@
 # Annou
 
-Annou is a discord bot that plays an audio from youtube when you enter a voice channel
+Annou is a discord bot that allows you to select a YouTube video as your entrance announcement in a voice channel
 
-![](https://gph.is/g/Evp1rqw)
+<p align="center">
+  <img src="https://media.giphy.com/media/EC5faZdqV4Vw4byEMz/giphy.gif"/>
+</p>
 
 ## How it works
 >
