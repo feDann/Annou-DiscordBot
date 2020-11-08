@@ -1,6 +1,6 @@
 # Annou
 
-Annou is a discord bot that allows you to select a YouTube video as your entrance announcement in a voice channel
+Annou is a discord bot that allows you to select a YouTube video as your entrance announcement for a voice channel
 
 <p align="center">
   <img src="https://media.giphy.com/media/EC5faZdqV4Vw4byEMz/giphy.gif"/>
