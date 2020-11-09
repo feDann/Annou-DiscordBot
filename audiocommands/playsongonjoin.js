@@ -20,7 +20,7 @@ module.exports = {
 		
 		if (!song) return;
 		
-		console.log(`Song founded for ${username} -> ${song.url}`)
+		console.log(`Found song for ${username} -> ${song.url}`)
 		const connection = await newMember.channel.join();
 		
 		console.log(`Connection established`)
