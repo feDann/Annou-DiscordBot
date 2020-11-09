@@ -7,7 +7,21 @@ module.exports = {
 	name: 'setsong',
 	description:
 		'add your song related to your current voice channel to the db',
+	/**
+	 *
+	 * @param {Message} message message from the user
+	 * @param {String[]} args command arguments
+	 */
 	async execute(message, args) {
+		if (message.channel.type === 'dm') {
+			message.reply(
+				new MessageEmbed().setDescription(
+					'You cannot use this command in dm channel!'
+				)
+			);
+			return;
+		}
+
 		const channelid = message.member.voice.channelID;
 		const guildid = message.guild.id;
 		const userid = message.author.id;

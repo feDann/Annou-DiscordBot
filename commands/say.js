@@ -5,7 +5,20 @@ const ISO6391 = require('iso-639-1');
 module.exports = {
 	name: 'say',
 	description: 'Annou join the voice channel and say the text',
+	/**
+	 *
+	 * @param {Message} message message from the user
+	 * @param {String[]} args command arguments
+	 */
 	async execute(message, args) {
+		if (message.channel.type === 'dm') {
+			message.reply(
+				new MessageEmbed().setDescription(
+					'You cannot use this command in dm channel!'
+				)
+			);
+			return;
+		}
 		if (message.member.voice.channelID) {
 			try {
 				if (args.length >= 2) {

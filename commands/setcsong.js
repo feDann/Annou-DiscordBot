@@ -8,10 +8,18 @@ module.exports = {
 	description: ' ',
 	/**
 	 *
-	 * @param {Message} message the message from the user
-	 * @param {String[]} args arguments of command
+	 * @param {Message} message message from the user
+	 * @param {String[]} args command arguments
 	 */
 	async execute(message, args) {
+		if (message.channel.type === 'dm') {
+			message.reply(
+				new MessageEmbed().setDescription(
+					'You cannot use this command in dm channel!'
+				)
+			);
+			return;
+		}
 		var startTime = '0';
 		const voiceChannel = message.guild.channels.cache
 			.filter((c) => c.type === 'voice')
