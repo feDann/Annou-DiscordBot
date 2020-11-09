@@ -13,7 +13,7 @@ const fs = require('fs');
 const TOKEN = process.env.TOKEN;
 const DBURL = process.env.DB_URL;
 
-const prefix = "!";
+const prefix = "an:";
 
 
 bot.commands = new Discord.Collection();
@@ -43,7 +43,7 @@ bot.login(TOKEN);
 bot.on('ready', () => {
     const numberOfGuilds = bot.guilds.cache.size
     console.info(`Logged in as ${bot.user.tag}!\nCurrently in ${numberOfGuilds} guilds!`);
-    bot.user.setActivity(`!help`, { type: "LISTENING" });
+    bot.user.setActivity(`${prefix}help`, { type: "LISTENING" });
 });
 
 bot.on('guildDelete' || 'guildUnavailable', async guild => {

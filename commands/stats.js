@@ -11,7 +11,7 @@ module.exports = {
 	 * @param {String[]} args the command arguments
 	 */
 	execute(message, args) {
-		console.log('here');
+
 		const guildsNumber = message.client.guilds.cache.size;
 		const channelsNumber = message.client.channels.cache.size;
 		const members = message.client.users.cache.size;
@@ -23,7 +23,7 @@ module.exports = {
 			100;
 		const adminid = process.env.ADMIN_ID;
 
-		console.log('here');
+
 
 		if (!message.author.id === adminid) {
 			message.reply(
