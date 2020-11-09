@@ -13,7 +13,6 @@ module.exports = {
 
 		const guildsNumber = message.client.guilds.cache.size;
         const channelsNumber = message.client.channels.cache.size;
-        console.log(message.client.guilds.cache.map(guild => guild.memberCount))
         const members = message.client.guilds.cache.map(guild => guild.memberCount).reduce((accumulator, currentValue) => accumulator + currentValue,0);
         const pid = process.pid;
         const ping = Math.round(message.client.ws.ping);
