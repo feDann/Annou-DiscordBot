@@ -1,6 +1,5 @@
 const { Message, MessageEmbed } = require('discord.js');
-// const dotenv = require('dotenv');
-// dotenv.config();
+
 
 module.exports = {
 	name: 'stats',

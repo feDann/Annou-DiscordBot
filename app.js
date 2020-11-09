@@ -55,6 +55,17 @@ bot.on('guildDelete' || 'guildUnavailable', async guild => {
 
 });
 
+bot.on('channelDelete',async channel =>{
+    if(!(channel.type === 'voice')) return;
+
+    const channelID = channel.id;
+
+    await AlertSchema.deleteMany({ channelid: channelID });
+    await AudioOn.deleteMany({ channelid: channelID });
+    console.log('All channellID reference deleted from DB');
+
+});
+
 
 bot.on('message', message => {
     if (!message.content.startsWith(prefix) || message.author.bot) return;
