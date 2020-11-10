@@ -12,11 +12,11 @@ module.exports = {
 	execute(message, args) {
 
 		const guildsNumber = message.client.guilds.cache.size;
-        const channelsNumber = message.client.channels.cache.size;
-        const members = message.client.guilds.cache.map(guild => guild.memberCount).reduce((accumulator, currentValue) => accumulator + currentValue,0);
-        const pid = process.pid;
-        const ping = Math.round(message.client.ws.ping);
-        const avatar = message.client.user.avatarURL();
+		const channelsNumber = message.client.channels.cache.size;
+		const members = message.client.guilds.cache.map(guild => guild.memberCount).reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+		const pid = process.pid;
+		const ping = Math.round(message.client.ws.ping);
+		const avatar = message.client.user.avatarURL();
 		const ram =
 			Math.floor((process.memoryUsage().heapUsed / 1024 / 1024) * 100) /
 			100;
@@ -36,8 +36,13 @@ module.exports = {
 		const stats = new MessageEmbed({
 			title: 'Annou stats',
 			thumbnail: {
-                url : avatar
-            },
+				url: avatar
+			},
+			timestamp: new Date(),
+			footer: {
+				iconURL: avatar,
+				text: 'Annou'
+			},
 			fields: [
 				{
 					name: 'PID',
