@@ -1,23 +1,26 @@
 {
-  "name": "annou",
-  "version": "1.0.0",
-  "description": "Annou discord bot",
-  "repository": "https://github.com/feDann/Annou-DiscordBot",
-  "main": "app.js",
-  "scripts": {
-    "start": "nodemon app.js"
-  },
-  "author": "fedann",
-  "license": "ISC",
-  "dependencies": {
-    "discord.js": "^12.4.1",
-    "dotenv": "^8.2.0",
-    "ffmpeg-static": "^4.2.7",
-    "google-tts-api": "0.0.4",
-    "iso-639-1": "^2.1.4",
-    "mongoose": "^5.10.11",
-    "node-opus": "^0.3.3",
-    "nodemon": "^2.0.6",
-    "ytdl-core": "^4.0.3"
-  }
+	"name": "annou",
+	"version": "1.0.0",
+	"description": "Annou discord bot",
+	"repository": "https://github.com/feDann/Annou-DiscordBot",
+	"main": "app.js",
+	"scripts": {
+		"start": "nodemon app.js"
+	},
+	"author": "fedann",
+	"license": "ISC",
+	"dependencies": {
+		"discord.js": "^12.4.1",
+		"dotenv": "^8.2.0",
+		"ffmpeg-static": "^4.2.7",
+		"google-tts-api": "0.0.4",
+		"iso-639-1": "^2.1.4",
+		"mongoose": "^5.10.11",
+		"node-opus": "^0.3.3",
+		"nodemon": "^2.0.6",
+		"ytdl-core": "^4.0.3"
+	},
+	"engines": {
+		"node": "14.15.0"
+	}
 }
