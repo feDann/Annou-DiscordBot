@@ -22,7 +22,7 @@ module.exports = {
 
 		console.log(`Found song for ${username} -> ${song.url}`)
 		const connection = await newMember.channel.join();
-		await connection.voice.setDeaf(true);
+		connection.voice.setDeaf(true);
 
 		console.log(`Connection established`)
 		const stream = ytdl(song.url, { type: 'opus', filter: 'audioonly' });
