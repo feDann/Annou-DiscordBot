@@ -34,7 +34,6 @@ module.exports = {
 						}
 
 						const connection = await message.member.voice.channel.join();
-						connection.voice.setDeaf(true);
 						const url = await tts(text, lang, 1);
 						const dispatcher = connection.play(url);
 						message.react('▶');

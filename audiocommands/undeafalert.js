@@ -7,7 +7,6 @@ module.exports = {
         try {
             const username = newMember.member.displayName;
             const connection = await newMember.channel.join();
-            connection.voice.setDeaf(true);
             const url = await tts(`${username} now can ear`, 'en', 1);
             const dispatcher = connection.play(url);
         } catch (err) {
