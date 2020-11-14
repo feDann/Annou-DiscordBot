@@ -1,18 +1,19 @@
 const tts = require('../utils/tts');
 
 module.exports = {
-    name : 'undeafalert',
-    description : 'this command is autocalled when someone mute himself',
-    async execute(oldMember, newMember){
-        try{
+    name: 'undeafalert',
+    description: 'this command is autocalled when someone mute himself',
+    async execute(oldMember, newMember) {
+        try {
             const username = newMember.member.displayName;
             const connection = await newMember.channel.join();
-            const url =await  tts(`${username} now can ear`, 'en', 1);  
+            await connection.voice.setDeaf(true);
+            const url = await tts(`${username} now can ear`, 'en', 1);
             const dispatcher = connection.play(url);
-        }catch(err){
+        } catch (err) {
             console.log(`ERROR: ${err.message}`)
-        }  
-                  
+        }
+
 
     }
 }

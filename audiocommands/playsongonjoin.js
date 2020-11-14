@@ -17,26 +17,27 @@ module.exports = {
 			channelid: channelid,
 			userid: userid,
 		});
-		
+
 		if (!song) return;
-		
+
 		console.log(`Found song for ${username} -> ${song.url}`)
 		const connection = await newMember.channel.join();
-		
+		await connection.voice.setDeaf(true);
+
 		console.log(`Connection established`)
-		const stream = ytdl(song.url, {type: 'opus', filter: 'audioonly'});
+		const stream = ytdl(song.url, { type: 'opus', filter: 'audioonly' });
 		const dispatcher = connection.play(stream, {
 			seek: song.startTime ? song.startTime : '0',
 		});
-		
+
 		console.log(`Song playing!`)
-		
+
 		// ! Works but still in testing!
 		setTimeout(() => {
 			dispatcher.end();
 			stream.destroy();
 			console.log(`Song stopped!`)
 		}, 10 * 1000);
-		
+
 	},
 };
