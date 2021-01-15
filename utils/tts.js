@@ -4,7 +4,7 @@ async function tts(text, lang, speed) {
 	var numberOfTryes = 10;
 	while (numberOfTryes != 0) {
 		try {
-			const url = await googleTTS(text, lang, speed);
+			const url = googleTTS.getAudioUrl(text, { "lang": lang });
 			return url;
 		} catch (err) {
 			numberOfTryes -= 1;
