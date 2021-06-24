@@ -15,7 +15,6 @@ const DBURL = process.env.DB_URL;
 
 const prefix = "an:";
 
-
 bot.commands = new Discord.Collection();
 bot.audiocommands = new Discord.Collection();
 
@@ -82,13 +81,17 @@ bot.on('message', message => {
 })
 
 
+
 bot.on('voiceStateUpdate', async (oldMember, newMember) => {
 
     let newUserChannel = newMember.channel
     let oldUserChannel = oldMember.channel
 
     const username = newMember.member.displayName;
-
+  
+    
+    
+    
     if (newUserChannel !== null && oldUserChannel !== newUserChannel) {
         console.log(username + ' joined channel')
         bot.audiocommands.get('playsongonjoin').execute(oldMember, newMember)
@@ -127,6 +130,7 @@ bot.on('voiceStateUpdate', async (oldMember, newMember) => {
         }
 
     }
+    
 
 })
 

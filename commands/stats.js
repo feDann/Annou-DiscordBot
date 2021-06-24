@@ -24,7 +24,7 @@ module.exports = {
 
 
 
-		if (!message.author.id === adminid) {
+		if (message.author.id != adminid) {
 			message.reply(
 				new MessageEmbed().setDescription(
 					'You are not allowed to use this command!😎'
